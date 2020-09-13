@@ -1,14 +1,6 @@
 pipeline {
-
-  environment {
-    registry = "shipping.bizkt.com.au:5000/justme/myweb"
-    dockerImage = ""
-  }
-
   agent any
-
   stages {
-
     stage('Checkout Source') {
       steps {
         git 'https://github.com/krishanthisera/playjenkins.git'
@@ -16,20 +8,22 @@ pipeline {
     }
 
     stage('Build image') {
-      steps{
+      steps {
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
+
       }
     }
 
     stage('Push Image') {
-      steps{
+      steps {
         script {
           docker.withRegistry( "" ) {
             dockerImage.push()
           }
         }
+
       }
     }
 
@@ -38,9 +32,13 @@ pipeline {
         script {
           kubernetesDeploy(configs: "myweb.yaml", kubeconfigId: "kube-key-01")
         }
+
       }
     }
 
   }
-
+  environment {
+    registry = 'shipping.bizkt.com.au:5000/justme/myweb'
+    dockerImage = ''
+  }
 }
