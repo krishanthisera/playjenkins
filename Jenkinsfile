@@ -19,7 +19,7 @@ pipeline {
     stage('Push Image') {
       steps {
         script {
-          docker.withRegistry( "https://shipping.bizkt.com.au:443" ) {
+          docker.withRegistry( "https://shipping.bizkt.com.au:443", 'shipping_admin' ) {
             dockerImage.push()
           }
         }
