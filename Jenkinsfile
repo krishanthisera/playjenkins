@@ -38,7 +38,7 @@ pipeline {
 
   }
   environment {
-    registry = 'shipping.bizkt.com.au:5000/justme/myweb'
+    registry = 'shipping.bizkt.com.au:443/justme/myweb'
     dockerImage = ''
   }
 }
