@@ -19,7 +19,7 @@ pipeline {
     stage('Push Image') {
       steps {
         script {
-          docker.withRegistry( "" ) {
+          docker.withRegistry( "https://shipping.bizkt.com.au" ) {
             dockerImage.push()
           }
         }
